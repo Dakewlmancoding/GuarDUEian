@@ -20,6 +20,8 @@ void setup(){
 int leftRead, rightRead;
 int leftReadRAW, rightReadRAW;
 
+bool moveRight, moveLeft;
+
 
 void loop(){
     leftReadRAW = sensorLeft.measureDistanceCm();
@@ -39,17 +41,31 @@ void loop(){
     }
 
     if((leftRead < 0) and (rightRead > 0)) {
-        // Move Right
-
+        moveRight = true;
+        moveLeft = false;
     } else if((leftRead > 0) and (rightRead < 0)) {
-        // Move Left
+        moveLeft = true;
+        moveRight = false;
     } else {
-        // No Change
+        moveLeft = false;
+        moveRight = false;
     }
 
-    Serial.print("Left: ");
-    Serial.print(leftRead);
+    if (moveLeft or moveRight) {
+        if (moveLeft) {
+            Serial.println("Moving Left!");
+        } else if (moveRight) {
+            Serial.println("Moving Right!");
+        }
+        
+        
+    } else {
+        Serial.print("Left: ");
+        Serial.print(leftRead);
 
-    Serial.print(", Right: ");
-    Serial.println(rightRead);
+        Serial.print(", Right: ");
+        Serial.println(rightRead);
+    }
+    
+    
 }
