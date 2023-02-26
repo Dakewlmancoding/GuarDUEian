@@ -39,7 +39,8 @@ void loop(){
     }else {
         rightRead = -1;
     }
-    if ((moveLeft or moveRight) and ((moveLeft > 0) and (moveRight > 0)))
+
+    if ((leftRead > 0) or (rightRead > 0))
     {
         if((leftRead < 0) and (rightRead > 0)) {
             moveRight = true;
@@ -52,7 +53,7 @@ void loop(){
             moveRight = false;
         }
     }
-
+    
     if (moveLeft or moveRight) {
         if (moveLeft) {
             Serial.println("Moving Left!");
