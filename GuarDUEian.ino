@@ -39,16 +39,18 @@ void loop(){
     }else {
         rightRead = -1;
     }
-
-    if((leftRead < 0) and (rightRead > 0)) {
-        moveRight = true;
-        moveLeft = false;
-    } else if((leftRead > 0) and (rightRead < 0)) {
-        moveLeft = true;
-        moveRight = false;
-    } else {
-        moveLeft = false;
-        moveRight = false;
+    if ((moveLeft or moveRight) and ((moveLeft > 0) and (moveRight > 0)))
+    {
+        if((leftRead < 0) and (rightRead > 0)) {
+            moveRight = true;
+            moveLeft = false;
+        } else if((leftRead > 0) and (rightRead < 0)) {
+            moveLeft = true;
+            moveRight = false;
+        } else {
+            moveLeft = false;
+            moveRight = false;
+        }
     }
 
     if (moveLeft or moveRight) {
