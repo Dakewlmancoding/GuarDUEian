@@ -33,7 +33,7 @@ bool lightsOn, activeSearch, passiveSearch; //lightsOn is self explanatory. Acti
 
 
 
-void loop(){
+void loop() {
 
     getLRDistReadings();
     checkMoveHead();
