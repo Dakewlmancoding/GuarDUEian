@@ -26,7 +26,7 @@ void loop(){
     if (leftReadRAW < 30)
     {
         leftRead = leftReadRAW;
-    }else{
+    }else {
         leftRead = -1;
     }
 
@@ -34,8 +34,17 @@ void loop(){
     if (rightReadRAW < 30)
     {
         rightRead = rightReadRAW;
-    }else{
+    }else {
         rightRead = -1;
+    }
+
+    if((leftRead < 0) and (rightRead > 0)) {
+        // Move Right
+
+    } else if((leftRead > 0) and (rightRead < 0)) {
+        // Move Left
+    } else {
+        // No Change
     }
 
     Serial.print("Left: ");
