@@ -1,3 +1,4 @@
+#include <DueTimer.h>
 #include <HCSR04.h>
 
 const byte leftTrig = 2;
@@ -23,7 +24,7 @@ int leftReadRAW, rightReadRAW;
 bool moveRight, moveLeft;
 
 
-void loop(){
+void loop() {
 
     getLRDistReadings();
     moveHead();
