@@ -24,23 +24,35 @@ bool moveRight, moveLeft;
 
 
 void loop(){
+
+    getLRDistReadings();
+    moveHead();
+}
+
+void getLRDistReadings() {
     leftReadRAW = sensorLeft.measureDistanceCm();
+
     if (leftReadRAW < 30)
     {
         leftRead = leftReadRAW;
-    }else {
+    } else {
         leftRead = -1;
     }
 
     rightReadRAW = sensorRight.measureDistanceCm();
+
     if (rightReadRAW < 30)
     {
         rightRead = rightReadRAW;
-    }else {
+    } else {
         rightRead = -1;
     }
+}
 
-    if ((leftRead > 0) or (rightRead > 0))
+
+// Uses LRDistReadings to move head left or right 
+void moveHead() {
+        if ((leftRead > 0) or (rightRead > 0))
     {
         if((leftRead < 0) and (rightRead > 0)) {
             moveRight = true;
@@ -53,7 +65,7 @@ void loop(){
             moveRight = false;
         }
     }
-    
+
     if (moveLeft or moveRight) {
         if (moveLeft) {
             Serial.println("Moving Left!");
@@ -69,6 +81,5 @@ void loop(){
         Serial.print(", Right: ");
         Serial.println(rightRead);
     }
-    
-    
 }
+    
