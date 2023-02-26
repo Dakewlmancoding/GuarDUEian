@@ -1,3 +1,4 @@
+#include <DueTimer.h>
 #include <HCSR04.h>
 
 const byte leftTrig = 2;
