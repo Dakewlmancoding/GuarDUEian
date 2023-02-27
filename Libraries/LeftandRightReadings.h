@@ -71,6 +71,7 @@ void checkMoveHead() {
         } else {
             moveLeft = false;
             moveRight = false;
+            //!!!!!NOTE THAT THERE CAN BE A CASE WHERE THE PLAYER LEAVES RANGE!!!!!
         }
     }
 }
