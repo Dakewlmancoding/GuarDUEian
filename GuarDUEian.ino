@@ -4,17 +4,16 @@
 #include "Libraries/rgbAnimations.h" // All RGB animations
 #include "Libraries/movingHead.h" // All RGB animations
 
-const byte eyePin = 8; // Eye data in pin
-
 void setup() {
     Serial.begin(115200);
     Serial.println("Hello World");
-    setupLights(eyePin);
+    setupLights();
 }
 
 void loop() {
     updateLRDistReadings();
     checkMoveHead();
+    rainbow(20);
     if (not moveHead(moveLeft,moveRight))
     {
         Serial.print("Left: ");
