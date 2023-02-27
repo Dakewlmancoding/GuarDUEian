@@ -15,46 +15,29 @@ const byte leftEcho = 3; //sensorLeft Echo pin
 const byte rightTrig = 10; //sensorRight Trig pin
 const byte rightEcho = 11; //sensorRight Echo pin
 
-const byte lightPin = 8; // Red RGB light strips pin
-
 const int maxDistCM = 30; // Sets the maximum distance for the sensor (in CM)
 
 // US SENSORS
-    /*
-    * Format: name(Trigger, Echo, maxCM) (maxCM ended up causing issues for some reason)
-    */
+    
+//Format: name(Trigger, Echo)
 UltraSonicDistanceSensor sensorLeft(leftTrig, leftEcho);
+//Format: name(Trigger, Echo)
 UltraSonicDistanceSensor sensorRight(rightTrig, rightEcho);
 
 // INTS
-    /*
-    * Stores the readings of the left and right US sensors
-    */
 int leftReadRAW, rightReadRAW;
+//Stores the readings of the left and right US sensors. -1 if out of range
 int leftRead, rightRead;
 
 // BOOLEANS
-    /*
-    * moveRight = is moving right
-    * moveLeft = is moving left
-    */
+//whether the head should be moving left or right
 bool moveRight, moveLeft;
 
-    /*
-    * lightsOn is self explanatory.
-    * activeSearch is the state where the lights are on and it is actively moving to find the player.
-    * passiveSearch is when the lights are on and the head is idely moving. Both search modes are controlled by timers.
-    */
-bool lightsOn, activeSearch, passiveSearch;
 
 /************************************************** FUNCTIONS ***************************************************/
 
-    /*
-    * getLRDistReadings()
-    * Gets readings from the left and right sensors if there is motion within the range of 0 and maxDistCM
-    */
-
-void getLRDistReadings() {
+//updates the varables leftRead and rightRead. If they are greater than maxDistCM, sets them to -1
+void updateLRDistReadings() {
     leftReadRAW = sensorLeft.measureDistanceCm();
 
     if (leftReadRAW < maxDistCM)
@@ -74,11 +57,8 @@ void getLRDistReadings() {
     }
 }
 
-    /*
-    * checkMoveHead()
-    * Uses LRDistReadings to set moveRight and moveLeft
-    */
 
+//Checks whether or not the head should move to follow the player, based on the most recent readings of leftRead and rightRead, and sets moveRight and/or moveLeft accordingly
 void checkMoveHead() {
         if ((leftRead > 0) or (rightRead > 0))
     {
@@ -92,35 +72,5 @@ void checkMoveHead() {
             moveLeft = false;
             moveRight = false;
         }
-    }
-}
-
-    /*
-    * moveHead()
-    * Test code for head moving (displays output in the Serial Monitor, doesn't use motors yet)
-    */
-void moveHead(){
-    if (moveLeft or moveRight) {
-        if (not lightsOn){
-            lightsOn = true;
-            digitalWrite(lightPin, HIGH);
-        }
-        
-        if (moveLeft) {
-            Serial.println("Moving Left!");
-        } else if (moveRight) {
-            Serial.println("Moving Right!");
-        }
-        
-    } else {
-        if (lightsOn){
-            lightsOn = false;
-            digitalWrite(lightPin, LOW);
-        }
-        Serial.print("Left: ");
-        Serial.print(leftRead);
-
-        Serial.print(", Right: ");
-        Serial.println(rightRead);
     }
 }
