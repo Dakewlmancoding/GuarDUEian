@@ -1,3 +1,6 @@
+#include <Adafruit_NeoMatrix.h>
+#include <gamma.h>
+
 #include <DueTimer.h>
 #include "Libraries/LeftandRightReadings.h" // lightPin comes from here
 
