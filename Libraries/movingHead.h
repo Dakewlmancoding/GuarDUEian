@@ -1,7 +1,5 @@
 /************************************************** VARIABLES ***************************************************/
 
-const byte lightPin = 8; // Red RGB light strips pin
-
 bool lightsOn; //lightsOn is self explanatory.
 
 bool activeSearch; // activeSearch is the state where the lights are on and it is actively moving to find the player.
@@ -15,7 +13,6 @@ bool moveHead(bool moveLeft, bool moveRight){
     if (moveLeft or moveRight) {
         if (not lightsOn){
             lightsOn = true;
-            digitalWrite(lightPin, HIGH);
         }
         
         if (moveLeft) {
@@ -29,7 +26,6 @@ bool moveHead(bool moveLeft, bool moveRight){
     } else {
         if (lightsOn){
             lightsOn = false;
-            digitalWrite(lightPin, LOW);
         }
         return false;
     }
