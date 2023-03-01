@@ -8,6 +8,7 @@ const int numLeds = 57;
 const int eyeBrightness = 100;
 Adafruit_NeoPixel eyeRings = Adafruit_NeoPixel(numLeds, eyePin, NEO_GRB + NEO_KHZ800);
 
+const uint32_t blue = eyeRings.Color(10, 0, 255);
 
 /************************************************** FUNCTIONS ***************************************************/
 
@@ -17,6 +18,12 @@ void setupLights(){
     eyeRings.setBrightness(eyeBrightness);
     //eyeRings.Color(0, 0, 255);
     eyeRings.show();
+}
+
+// now i make it do what I want to do
+void doLights() {
+  eyeRings.setPixelColor(1, blue);
+  eyeRings.show();
 }
 
 // Input a value 0 to 255 to get a color value.

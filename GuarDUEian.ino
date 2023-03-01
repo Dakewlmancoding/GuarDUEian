@@ -13,7 +13,8 @@ void setup() {
 void loop() {
     updateLRDistReadings();
     checkMoveHead();
-    rainbow(20);
+   // rainbow(20);
+   doLights();
     if (not moveHead(moveLeft,moveRight))
     {
         Serial.print("Left: ");
