@@ -39,20 +39,22 @@ void setup() {
 }
 
 void loop() {
+    beginLoopThreatLevel = threatLevel;
     updateLRDistReadings();
     checkMoveHead();
     doLights();
-    
     if (canSeePlayer()){
-        if (not threatLevel) {
+        threatTimer.reset();
+        if (not (threatLevel == 2)) {
             threatLevel = 2;
-            threatTimer.start(2000);
-        }
+            threatTimer.start(20000000);
+        } 
     }
-    
+    Serial.println(threatLevel);
     
 
 }
+
 /*
 if (moveLeft or moveRight){
 
