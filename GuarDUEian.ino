@@ -6,14 +6,12 @@
 
 /************************************************** VARIABLES ***************************************************/
 
-bool lightsOn; //lightsOn is self explanatory.
-
 int threatLevel; //the three threat levels. 0 is off (only seeing if player walks in front of it). 1 is passive (the lights are on and the head is idely moving). 2 is active (the lights are on and it is actively moving to find the player.)
 unsigned long playerLastSightedTime; //time in microseconds since it's seen the player
 
 
-Timer lightTimer; // the timer set to the framerate of the lights
-Timer threatTimer; //the timer to switch the threat level
+DueTimer lightTimer = DueTimer(0); // the timer set to the framerate of the lights
+DueTimer threatTimer = DueTimer(1); //the timer to switch the threat level
 
 /************************************************** FUNCTIONS ***************************************************/
 
@@ -38,16 +36,18 @@ void setup() {
     setupLights();
 }
 
+int beginLoopThreatLevel;
+
 void loop() {
     beginLoopThreatLevel = threatLevel;
     updateLRDistReadings();
     checkMoveHead();
     doLights();
     if (canSeePlayer()){
-        threatTimer.reset();
+        threatTimer.stop();
+        threatTimer.start(20000000);
         if (not (threatLevel == 2)) {
             threatLevel = 2;
-            threatTimer.start(20000000);
         } 
     }
     Serial.println(threatLevel);
