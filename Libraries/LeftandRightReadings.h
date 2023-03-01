@@ -40,8 +40,7 @@ bool moveRight, moveLeft;
 void updateLRDistReadings() {
     leftReadRAW = sensorLeft.measureDistanceCm();
 
-    if (leftReadRAW < maxDistCM)
-    {
+    if (leftReadRAW < maxDistCM){
         leftRead = leftReadRAW;
     } else {
         leftRead = -1;
@@ -49,8 +48,7 @@ void updateLRDistReadings() {
 
     rightReadRAW = sensorRight.measureDistanceCm();
 
-    if (rightReadRAW < maxDistCM)
-    {
+    if (rightReadRAW < maxDistCM){
         rightRead = rightReadRAW;
     } else {
         rightRead = -1;
@@ -60,8 +58,7 @@ void updateLRDistReadings() {
 
 //Checks whether or not the head should move to follow the player, based on the most recent readings of leftRead and rightRead, and sets moveRight and/or moveLeft accordingly
 void checkMoveHead() {
-        if ((leftRead > 0) or (rightRead > 0))
-    {
+        if ((leftRead > 0) or (rightRead > 0)){
         if((leftRead < 0) and (rightRead > 0)) {
             moveRight = true;
             moveLeft = false;
@@ -73,5 +70,14 @@ void checkMoveHead() {
             moveRight = false;
             //!!!!!NOTE THAT THERE CAN BE A CASE WHERE THE PLAYER LEAVES RANGE!!!!!
         }
+    }
+}
+
+//if both sensors have a reading, the guardian can see the player (true)
+bool canSeePlayer(){
+    if ((leftRead > 0) and (rightRead > 0)){
+        return true;
+    } else {
+        return false;
     }
 }
