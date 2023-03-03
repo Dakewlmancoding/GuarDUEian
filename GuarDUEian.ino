@@ -1,10 +1,9 @@
 #include <DueTimer.h>
-#include <Servo.h>
 
 
 #include "Libraries/LeftandRightReadings.h" // Ultrasonic Sensor Head Turning/Red RGB Light code
 #include "Libraries/rgbAnimations.h" // All RGB animations
-#include "Libraries/movingHead.h" // All RGB animations
+#include "Libraries/movingHead.h" // All servo stuff
 
 
 
@@ -33,9 +32,7 @@ void setup() {
     //timers
     threatTimer.attachInterrupt(updateThreat);
 
-    //lightTimerStuff
-
-
+    setupServo();
     setupLights();
 }
 
@@ -54,14 +51,24 @@ void loop() {
         } 
     }
 
-    if(threatLevel > 0) {
-        eyeOn(200); // input is the framerate in ms
-    } else {
-        eyeOff();
-    }
-
     Serial.println(threatLevel);
+
+    switch (threatLevel){
+    case 0:
+        eyeOff();
+    break;
     
+    case 1:
+        eyeOn(200);
+    break;
+
+    case 2:
+        eyeOn(200);
+    break;
+
+    default:
+        break;
+    }
 
 }
 
