@@ -52,7 +52,7 @@ void loop() {
     }
 
     if(threatLevel > 0) {
-        eyeOn(200);
+        eyeOn(200); // input is the framerate in ms
     } else {
         eyeOff();
     }
