@@ -8,11 +8,13 @@ const int numLeds = 57;
 const int eyeBrightness = 10;
 Adafruit_NeoPixel eyeRings = Adafruit_NeoPixel(numLeds, eyePin, NEO_GRB + NEO_KHZ800);
 
+unsigned long previousMillis; // Used in animation
+int frame = 0; // Used in animation
+
 const int ring1 = 20; // Number of lights in the outer ring
 const int ring2 = 16;
 const int ring3 = 12;
-const int ring4 = 8;
-const int ring5 = 1; // Number of lights in the inner ring 
+const int ring4 = 8; // Number of lights in the inner ring 
 
 const uint32_t darkBlue = eyeRings.Color(3, 0, 100);
 const uint32_t blue = eyeRings.Color(0, 200, 220);
@@ -21,11 +23,11 @@ const uint32_t lightBlue = eyeRings.Color(0, 235, 255);
 
 /************************************************** FUNCTIONS ***************************************************/
 
-
+// Runs in setup - general matrix startup stuff and it forces the eye to show as off
 void setupLights(){
     eyeRings.begin();
     eyeRings.setBrightness(eyeBrightness);
-    //eyeRings.Color(0, 0, 255);
+    eyeRings.fill(eyeRings.Color(0, 0, 0));
     eyeRings.show();
 }
 
@@ -45,40 +47,37 @@ void drawFrame(int numRings, int previousRings, int size, uint32_t color, int pr
     drawRing(previousRings2, size2, color2);
   }
   eyeRings.show();
-  delay(framerate);
 }
 
-// now i make it do what I want to do
-void doLights() {
-  drawFrame(2, 0, ring1, blue, (ring1 + ring2 + ring3), ring4, lightBlue, 120); 
-  drawFrame(1, (ring1+ ring2), ring3, midBlue, 0, 0, blue, 200); 
-  drawFrame(2, ring1, ring2, blue, (ring1 + ring2 + ring3), ring4, lightBlue, 200);
-  drawFrame(2, 0, ring1, blue, (ring1 + ring2), ring3, lightBlue, 120);  
-}
-
-// Input a value 0 to 255 to get a color value.
-// The colours are a transition r - g - b - back to r.
-uint32_t Wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if(WheelPos < 85) {
-    return eyeRings.Color(255 - WheelPos * 3, 0, WheelPos * 3);
-  }
-  if(WheelPos < 170) {
-    WheelPos -= 85;
-    return eyeRings.Color(0, WheelPos * 3, 255 - WheelPos * 3);
-  }
-  WheelPos -= 170;
-  return eyeRings.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
-}
-
-void rainbow(uint8_t wait) {
-  uint16_t i, j;
-
-  for(j=0; j<256; j++) {
-    for(i=0; i<eyeRings.numPixels(); i++) {
-      eyeRings.setPixelColor(i, Wheel((i+j) & 255));
+// Draws the frames for the eye animation
+void eyeOn(int framerate) {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= framerate) {
+    switch(frame) {
+      case 0: 
+        drawFrame(2, 0, ring1, blue, (ring1 + ring2 + ring3), ring4, lightBlue, 120); 
+        frame++;
+        break;
+      case 1:
+        drawFrame(1, (ring1+ ring2), ring3, midBlue, 0, 0, blue, 200); 
+        frame++;
+        break;
+      case 2:
+        drawFrame(2, ring1, ring2, blue, (ring1 + ring2 + ring3), ring4, lightBlue, 200);
+        frame++;
+        break;
+      case 3:
+        drawFrame(2, 0, ring1, blue, (ring1 + ring2), ring3, lightBlue, 120);
+        frame = 0;
+        break;
     }
-    eyeRings.show();
-    delay(wait);
+    previousMillis = currentMillis;
   }
+}
+
+// Forces the eye off very aggressively 
+void eyeOff() {
+  eyeRings.clear();
+  eyeRings.fill(eyeRings.Color(0, 0, 0));
+  eyeRings.show();
 }

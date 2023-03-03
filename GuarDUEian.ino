@@ -42,14 +42,21 @@ void loop() {
     beginLoopThreatLevel = threatLevel;
     updateLRDistReadings();
     checkMoveHead();
-    doLights();
     if (canSeePlayer()){
         threatTimer.stop();
         threatTimer.start(20000000);
+
         if (not (threatLevel == 2)) {
             threatLevel = 2;
         } 
     }
+
+    if(threatLevel > 0) {
+        eyeOn(200);
+    } else {
+        eyeOff();
+    }
+
     Serial.println(threatLevel);
     
 
