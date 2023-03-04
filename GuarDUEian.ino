@@ -1,6 +1,5 @@
 #include <DueTimer.h>
 
-
 #include "Libraries/LeftandRightReadings.h" // Ultrasonic Sensor Head Turning/Red RGB Light code
 #include "Libraries/rgbAnimations.h" // All RGB animations
 #include "Libraries/movingHead.h" // All servo stuff
@@ -53,7 +52,7 @@ void setup() {
     //timers
     threatTimer.attachInterrupt(updateThreat);
     idleTimer.attachInterrupt(updateIdle);
-    idleTimer.start(5000000);
+    idleTimer.start(3000000);
 
     setupServo();
     setupLights();
@@ -94,6 +93,8 @@ void loop() {
             moveHead('r');
         } else if (moveLeft){
             moveHead('l');
+        } else{
+            moveHead('n');
         }
     break;
 
