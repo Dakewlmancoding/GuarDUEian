@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-g++",
+            "compilerPath": "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\bin\\arm-none-eabi-g++",
             "compilerArgs": [
                 "-w",
                 "-std=gnu++11",
@@ -17,27 +17,28 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/system/libsam",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/system/CMSIS/CMSIS/Include/",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/system/CMSIS/Device/ATMEL/",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/cores/arduino",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/variants/arduino_due_x",
-                "/Users/katiestevens/Documents/Arduino/libraries/DueTimer",
-                "/Users/katiestevens/Documents/Arduino/libraries/HCSR04/src",
-                "/Users/katiestevens/Documents/Arduino/libraries/Adafruit_NeoPixel",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/c++/4.8.3",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/c++/4.8.3/arm-none-eabi",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/c++/4.8.3/backward",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include-fixed",
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include"
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\system\\libsam",
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\system\\CMSIS\\CMSIS\\Include\\",
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\system\\CMSIS\\Device\\ATMEL\\",
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\cores\\arduino",
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\variants\\arduino_due_x",
+                "C:\\Users\\Jack Bell\\Documents\\Arduino\\libraries\\SD\\src",
+                "C:\\Users\\Jack Bell\\Documents\\Arduino\\libraries\\TMRpcm",
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\libraries\\SPI\\src",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\arm-none-eabi",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\backward",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include-fixed",
+                "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include"
             ],
             "forcedInclude": [
-                "/Users/katiestevens/Library/Arduino15/packages/arduino/hardware/sam/1.6.12/cores/arduino/Arduino.h"
+                "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\cores\\arduino\\Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
             "defines": [
+                "printf=iprintf",
                 "F_CPU=84000000L",
                 "ARDUINO=10607",
                 "ARDUINO_SAM_DUE",
