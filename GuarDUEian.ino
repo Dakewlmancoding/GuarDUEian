@@ -51,6 +51,8 @@ void updateIdle(){
 }
 
 void updateShoot() {
+    pleaseWork();
+    /*
     if(shootIteration <= (shootEvery/2)) {
         // Low pitch sound
         shootIteration++;
@@ -64,19 +66,19 @@ void updateShoot() {
 
         // Blow fan
         // Shooty sound pew pew
-        eyeShoot(); // Change eye LED animation from idle
+        //eyeShoot(); // Change eye LED animation from idle
         // Servo to shoot laser
         // (?) Get light level from photocell fAST
         // Check to see if player got hit and react
 
         shootIteration = 0;
     }
+    */
 }
 
 // Helps timer durations a lot easier to read by converting microseconds to seconds
-int microToSec(int l) {
-    l = l * 100000;
-    return l;
+int microToSec(int ms) {
+    return ms*1000000;
 }
 
 // Helps animation durations a lot easier to read by converting milliseconds to seconds
@@ -99,6 +101,7 @@ void setup() {
     idleTimer.start(microToSec(3));
 
     setupServo();
+    setupLaserServo();
     setupLights();
 }
 
@@ -108,7 +111,6 @@ void loop() {
     beginLoopThreatLevel = threatLevel;
     updateLRDistReadings();
     checkMoveHead();
-   // pleaseWork();
 
     if (canSeePlayer()){
         threatTimer.stop();
@@ -134,7 +136,7 @@ void loop() {
     break;
 
     case 2:
-        eyeOn(milliToSec(200));
+        eyeOn(200);
         if (moveRight){
             moveHead('r');
         } else if (moveLeft){

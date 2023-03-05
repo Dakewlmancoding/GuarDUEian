@@ -5,12 +5,32 @@
 const int laserServo = 6;
 
 const uint16_t neutral = 1500;
-const uint16_t moved = 500;
+const uint16_t max = 2500;
+const uint16_t min = 500;
 
 void setupLaserServo() {
-    initServo(laserServo,900); // attaches the servo on pin 5
+    initServo(laserServo,800); // attaches the servo on pin 6
+    writeMicros(laserServo, neutral);
 }
 
+int ServoPos = 0;
 void pleaseWork() {
-    writeMicros(laserServo, moved);
+    ServoPos++;
+    if (ServoPos >=3){
+        ServoPos = 0;
+    }
+    switch (ServoPos){
+    case 0:
+    case 2:
+        writeMicros(laserServo, neutral);
+    break;
+    
+    case 1:
+        writeMicros(laserServo, min);
+    break;
+
+    case 3:
+        writeMicros(laserServo, max);
+    break;
+    }
 }
