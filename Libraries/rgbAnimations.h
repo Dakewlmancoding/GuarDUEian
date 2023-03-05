@@ -3,7 +3,7 @@
 
 /************************************************** VARIABLES ***************************************************/
 
-const int eyePin = 8; // Eye data in pin
+const int eyePin = 9; // Eye data in pin
 const int numLeds = 57;
 const int eyeBrightness = 10;
 Adafruit_NeoPixel eyeRings = Adafruit_NeoPixel(numLeds, eyePin, NEO_GRB + NEO_KHZ800);
