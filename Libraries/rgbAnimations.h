@@ -81,3 +81,10 @@ void eyeOff() {
   eyeRings.fill(eyeRings.Color(0, 0, 0));
   eyeRings.show();
 }
+
+// Eye animation for shooting
+void eyeShoot() {
+  eyeRings.clear();
+  eyeRings.fill(lightBlue);
+  eyeRings.show();
+}
