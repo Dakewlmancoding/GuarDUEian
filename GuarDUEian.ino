@@ -18,16 +18,20 @@ DueTimer shootTimer = DueTimer(8); //the timer to decide when the laser shoots
 char idleDirection;
 
 int shootIteration = 0; // Iterative variable for counting sec until shoot
-const int shootEvery = 6; // Duration between when the laser will shoot at threat level 2
+const int shootEvery = 5; // Duration between when the laser will shoot at threat level 2
 
 /************************************************** FUNCTIONS ***************************************************/
 
 void updateThreat(){
     if (threatLevel > 0){
         threatLevel--;
+        if(threatLevel != 2) {
+            resetTab();
+        }
     }
     if(threatLevel != 2) {
         shootTimer.stop();
+        shootIteration = 0;
     }
 }
 
@@ -51,29 +55,33 @@ void updateIdle(){
 }
 
 void updateShoot() {
-    pleaseWork();
-    /*
+    Serial.print("Shooting in... ");
+    Serial.println((shootEvery - shootIteration));
+
     if(shootIteration <= (shootEvery/2)) {
+        if(shootIteration == 0) {
+            resetTab();
+        }
         // Low pitch sound
         shootIteration++;
-    } else if((shootIteration <= (shootEvery/2)) && (shootIteration < shootEvery)) {
+
+    } else if(shootIteration != shootEvery) {
         // High pitch sound
         shootIteration++;
+
     } else if(shootIteration == shootEvery) {
         // Pause head motion
         moveLeft = false;
         moveRight = false;
-
         // Blow fan
-        // Shooty sound pew pew
-        //eyeShoot(); // Change eye LED animation from idle
+        moveTab();
+         // Change eye LED animation from idle
         // Servo to shoot laser
         // (?) Get light level from photocell fAST
         // Check to see if player got hit and react
 
         shootIteration = 0;
     }
-    */
 }
 
 // Helps timer durations a lot easier to read by converting microseconds to seconds
