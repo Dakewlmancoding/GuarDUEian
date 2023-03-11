@@ -7,5 +7,4 @@
 - DueServo by Sebastian (NOTE:MANUALLY GRAB THIS FROM THE DRIVE!!!!)
 - Adafruit NeoPixel by Adafruit 
 - Servo by Michael Margolis 
-- SD by Arduino, SparkFun
-- Audio by Arduino
+- ArduinoBLE by Arduino
