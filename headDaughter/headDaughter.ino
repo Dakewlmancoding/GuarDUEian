@@ -1,10 +1,11 @@
 #include <ArduinoBLE.h>
 #include "Libraries/rgbAnimations.h"
 
-// Arduino Nano 
-// Bools being Passed: MoveLeft, MoveRight, LookingAtPlayer, int ThreatLevel
-
-int threatLevel = 2;
+/** VARIABLES GETTING PASSED */
+int threatLevel = 2; // 0, 1, or 2
+bool moveLeft;
+bool moveRight;
+bool canSeePlayer;
 
 void setup(){
    setupLights(); 
