@@ -88,3 +88,13 @@ void eyeShoot() {
   eyeRings.fill(lightBlue);
   eyeRings.show();
 }
+
+// Turns on body lights
+void lightsOn() {
+
+}
+
+// Turns off body lights
+void lightsOff() {
+
+}
