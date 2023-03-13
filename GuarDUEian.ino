@@ -1,10 +1,8 @@
 #include <DueTimer.h>
 
 #include "Libraries/LeftandRightReadings.h" // Ultrasonic Sensor Head Turning/Red RGB Light code
-#include "Libraries/rgbAnimations.h" // All RGB animations
 #include "Libraries/movingHead.h" // All servo stuff
-#include "Libraries/shootLaser.h" // Laser shooting
-
+#include "Libraries/song.h" // The music
 
 /************************************************** VARIABLES ***************************************************/
 
@@ -101,6 +99,8 @@ void setup() {
     Serial.begin(115200);
     Serial.println("Hello World");
 
+    Serial2.begin(115200); //Mozzi Synth Uno
+
     //timers
     threatTimer.attachInterrupt(updateThreat);
     idleTimer.attachInterrupt(updateIdle);
@@ -134,6 +134,7 @@ void loop() {
 
     switch (threatLevel){
     case 0:
+        stopSong();
         eyeOff();
         moveHead('n');
     break;

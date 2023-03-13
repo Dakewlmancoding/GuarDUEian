@@ -1,5 +1,5 @@
 {
-    "board": "arduino:samd:nano_33_iot",
-    "port": "COM8",
-    "sketch": "headDaughter.ino"
+    "board": "arduino:sam:arduino_due_x_dbg",
+    "port": "COM7",
+    "sketch": "GuarDUEian.ino"
 }
