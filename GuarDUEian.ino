@@ -107,7 +107,6 @@ void setup() {
     Serial2.begin(115200); //Mozzi Synth Uno
     
     Serial3.begin(9600); //bluetooth
-    Serial3.print("AT+ROLE=0");
     Serial.println(Serial3.readString());
 
 
@@ -133,7 +132,7 @@ void loop() {
     switch (canSeePlayer) {
     case 1:
         threatTimer.stop();
-        threatTimer.start(secToMicro(5));
+        threatTimer.start(secToMicro(20));
         //shootTimer.start(secToMicro(1));
         threatLevel = 2;
         ranResets = false;

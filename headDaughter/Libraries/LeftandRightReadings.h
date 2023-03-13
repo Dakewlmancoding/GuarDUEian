@@ -10,12 +10,12 @@
 /************************************************** VARIABLES ***************************************************/
 
 // PINS & CONSTANTS
-const byte leftTrig = 2; //sensorLeft Trig pin
-const byte leftEcho = 3; //sensorLeft Echo pin
-const byte rightTrig = 10; //sensorRight Trig pin
-const byte rightEcho = 11; //sensorRight Echo pin
+const byte leftTrig = 21; //sensorLeft Trig pin
+const byte leftEcho = 20; //sensorLeft Echo pin
+const byte rightTrig = 14; //sensorRight Trig pin
+const byte rightEcho = 15; //sensorRight Echo pin
 
-const int maxDistCM = 30; // Sets the maximum distance for the sensor (in CM)
+const int maxDistCM = 60; // Sets the maximum distance for the sensor (in CM)
 
 // US SENSORS
     
@@ -53,6 +53,9 @@ void updateLRDistReadings() {
     } else {
         rightRead = -1;
     }
+    Serial.print(rightRead);
+    Serial.print(" (-) ");
+    Serial.println(leftRead);
 }
 
 

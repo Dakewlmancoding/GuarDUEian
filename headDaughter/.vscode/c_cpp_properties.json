@@ -26,6 +26,8 @@
                 "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\samd\\1.8.13\\cores\\arduino",
                 "C:\\Users\\Jack Bell\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\samd\\1.8.13\\variants\\nano_33_iot",
                 "C:\\Users\\Jack Bell\\Documents\\Arduino\\libraries\\ArduinoBLE\\src",
+                "C:\\Users\\Jack Bell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel",
+                "C:\\Users\\Jack Bell\\Documents\\Arduino\\libraries\\HCSR04\\src",
                 "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\7-2017q4\\arm-none-eabi\\include\\c++\\7.2.1",
                 "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\7-2017q4\\arm-none-eabi\\include\\c++\\7.2.1\\arm-none-eabi",
                 "c:\\users\\jack bell\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\7-2017q4\\arm-none-eabi\\include\\c++\\7.2.1\\backward",
