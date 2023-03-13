@@ -7,8 +7,40 @@ bool moveLeft;
 bool moveRight;
 bool canSeePlayer;
 
+void connectToDue(){
+    while (true){
+        due = BLE.available();
+        if (due.localName() == "HC-06"){
+            BLE.stopScan();
+            Serial.println("Found it!");
+            if (due) {
+                Serial.println("Connecting ...");
+                if (due.connect()) {
+                    Serial.println("Connected");
+                    break;
+                } else {
+                    Serial.println("Failed to connect!");
+                return;
+                }
+            }
+        }
+    }
+    Serial.println(due.localName());
+    due.discoverAttributes();
+
+    BLEService dueService = due.service(3);
+    BLECharacteristic dueWrite = dueService.characteristic(1);
+    BLECharacteristic dueRead = dueService.characteristic(0);
+    
+    //DEMO!!!!
+    dueWrite.writeValue("100");
+    delay(1000);
+    dueWrite.writeValue("000");
+}
+
+
 void setup(){
-   setupLights(); 
+    setupLights(); 
 }
 
 void loop(){

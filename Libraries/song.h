@@ -12,6 +12,8 @@ const float loopTimingsArray[] = {0, 0.16061845625, 0.16196254375, 0.16061845625
 
 const int loopLen = 64;
 
+const int slowFactor = 1;
+
 /************************************************** FUNCTIONS ***************************************************/
 
 
@@ -34,6 +36,7 @@ void updateSong(){
             if (songPos<introLen){
                 if (introNoteArray[songPos] > 0){
                     Serial2.print(introNoteArray[songPos]);
+                    Serial.println(introNoteArray[songPos]);
                 }
                 /*
                 else{
@@ -41,7 +44,8 @@ void updateSong(){
                 }
                 */
                 
-                nextWait = introTimingsArray[songPos] * 1000;
+                
+                nextWait = introTimingsArray[songPos] * 1000 * slowFactor;
                 previousMillis = millis();
                 while (not Serial2.available()){} //to not overload the UNO
                 Serial2.flush();
@@ -56,8 +60,14 @@ void updateSong(){
             if (songPos<loopLen){
                 if (loopNoteArray[songPos] > 0){
                     Serial2.print(loopNoteArray[songPos]);
+                    Serial.println(loopNoteArray[songPos]);
                 }
-                nextWait = loopTimingsArray[songPos] * 1000;
+                /*
+                else{
+                    Serial2.print("0000");
+                }
+                */
+                nextWait = loopTimingsArray[songPos] * 1000 * slowFactor;
                 previousMillis = millis();
                 while (not Serial2.available()){} //to not overload the UNO
                 Serial2.flush();
