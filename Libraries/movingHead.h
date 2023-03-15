@@ -10,6 +10,7 @@ const uint16_t right = 2500;
 
 /************************************************** FUNCTIONS ***************************************************/
 
+
 void setupServo() {
     initServo(headServo,900); // attaches the servo on pin 7
 }
@@ -17,8 +18,8 @@ void setupServo() {
 char lastDirection;
 //moves the servo in direction. l = counterclockwise, r = clockwise, n = don't move
 void moveHead(char direction){
-    //Serial.print(direction);
-    //Serial.println(" in MoveHead");
+    SerialUSB.print(direction);
+    SerialUSB.println(" in MoveHead");
     if (not (direction == lastDirection)){
         lastDirection = direction;
         switch (direction){

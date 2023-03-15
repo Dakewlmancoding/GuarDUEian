@@ -18,7 +18,7 @@ const int shootEvery = 5; // Duration between when the laser will shoot at threa
 bool shootLaser;
 
 int lastThreatLevel;
-char headStatus[3]; //canSeePlayer,moveLeft,moveRight
+char headStatus[4]; //canSeePlayer,moveLeft,moveRight
 bool moveRight;
 bool moveLeft;
 bool canSeePlayer;
@@ -27,6 +27,7 @@ bool ranResets;
 /************************************************** FUNCTIONS ***************************************************/
 
 
+//updates the threat level. If it can't see the player actively (level 2) turns off the laser timer
 void updateThreat(){
     Serial.println("Updating Threat!");
     if (threatLevel > 0){
@@ -39,7 +40,9 @@ void updateThreat(){
     }
 }
 
+//picks a random direction to move in during passive search mode (threat level 1)
 void updateIdle(){
+    SerialUSB.println("Updating Idle");
     switch (random(0,2)) {
     case 0:
         idleDirection = 'n';
@@ -58,6 +61,8 @@ void updateIdle(){
     }
 }
 
+
+//code to shoot the laser. Moved to Nano/head and not fully implented
 void updateShoot() {
     Serial.print("Shooting in... ");
     Serial.println((shootEvery - shootIteration));
@@ -101,19 +106,19 @@ int secToMilli(int s) {
 /************************************************** BUILT IN FUNCS ***************************************************/
 
 void setup() {
-    Serial.begin(115200);
-    Serial.println("Hello World");
+    SerialUSB.begin(115200);
+    SerialUSB.println("Hello World");
 
     Serial2.begin(115200); //Mozzi Synth Uno
     
     Serial3.begin(9600); //bluetooth
-    Serial.println(Serial3.readString());
+    //Serial.println(Serial3.readString());
 
 
     //timers
     threatTimer.attachInterrupt(updateThreat);
     idleTimer.attachInterrupt(updateIdle);
-    //shootTimer.attachInterrupt(updateShoot);
+    //shootTimer.attachInterrupt(updateShoot); timer to shoot the laser. Not implemented
 
     idleTimer.start(secToMicro(3));
 
@@ -122,45 +127,49 @@ void setup() {
 
 
 void loop() {
-    if (Serial3.available()){
-        Serial3.readBytes(headStatus,3);
-        Serial.println(headStatus);
+    //SerialUSB.println("top");
+    if (Serial3.available()){ //this is the cursed bool that works occasionally
+        SerialUSB.println("Reading");
+        Serial3.readBytes(headStatus,4); //gets info from Nano/head
+        SerialUSB.println(headStatus);
         canSeePlayer = headStatus[0]-'0';
         moveRight = headStatus[1]-'0';
         moveLeft = headStatus[2]-'0';
+        threatLevel = headStatus[3]-'0';
+        /*
+        SerialUSB.print(canSeePlayer);
+        SerialUSB.print(moveRight);
+        SerialUSB.print(moveLeft);
+        SerialUSB.println(threatLevel);
+        */
+    } else{
+        SerialUSB.println("Read Failed! :(");
     }
-    switch (canSeePlayer) {
-    case 1:
-        threatTimer.stop();
-        threatTimer.start(secToMicro(20));
-        //shootTimer.start(secToMicro(1));
-        threatLevel = 2;
-        ranResets = false;
-        break;
-    }
+    SerialUSB.print("Threat Level = ");
+    SerialUSB.println(threatLevel);
 
-
-    //Serial.println(threatLevel);
-
+    //switch statement to do events related to what threat level its at
     lastThreatLevel = threatLevel;
-    Serial3.print(threatLevel);
     switch (threatLevel){
     case 0:
+        SerialUSB.println("Case 0");
         if (not ranResets){
         stopSong();
         resetSong();
         moveHead('n');
-        threatTimer.stop();
         ranResets = true;
         }
     break;
 
     case 1:
+        SerialUSB.println("Case 1");
         updateSong();
         moveHead(idleDirection);
+        ranResets = false;
     break;
 
     case 2:
+        SerialUSB.println("Case 2");
         updateSong();
         if (moveRight){
             moveHead('r');
@@ -169,6 +178,7 @@ void loop() {
         } else{
             moveHead('n');
         }
+        ranResets = false;
     break;
     }
 }

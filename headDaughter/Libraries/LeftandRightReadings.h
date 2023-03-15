@@ -10,12 +10,12 @@
 /************************************************** VARIABLES ***************************************************/
 
 // PINS & CONSTANTS
-const byte leftTrig = 21; //sensorLeft Trig pin
-const byte leftEcho = 20; //sensorLeft Echo pin
-const byte rightTrig = 14; //sensorRight Trig pin
-const byte rightEcho = 15; //sensorRight Echo pin
+const byte leftTrig = 14   ; //sensorLeft Trig pin
+const byte leftEcho = 15; //sensorLeft Echo pin
+const byte rightTrig = 16; //sensorRight Trig pin
+const byte rightEcho = 17; //sensorRight Echo pin
 
-const int maxDistCM = 60; // Sets the maximum distance for the sensor (in CM)
+const int maxDistCM = 30; // Sets the maximum distance for the sensor (in CM)
 
 // US SENSORS
     
@@ -31,10 +31,17 @@ int leftRead, rightRead;
 
 // BOOLEANS
 //whether the head should be moving left or right
-bool moveRight, moveLeft;
+bool moveRight, moveLeft, canSee;
 
 
 /************************************************** FUNCTIONS ***************************************************/
+
+void debugReadings(){
+    Serial.print(sensorRight.measureDistanceCm());
+    Serial.print(" (-) ");
+    Serial.println(sensorLeft.measureDistanceCm());
+}
+
 
 //updates the varables leftRead and rightRead. If they are greater than maxDistCM, sets them to -1
 void updateLRDistReadings() {
@@ -53,11 +60,16 @@ void updateLRDistReadings() {
     } else {
         rightRead = -1;
     }
-    Serial.print(rightRead);
-    Serial.print(" (-) ");
-    Serial.println(leftRead);
 }
 
+//if both sensors have a reading, the guardian can see the player (true)
+bool canSeePlayer(){
+    if ((leftRead > 0) and (rightRead > 0)){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //Checks whether or not the head should move to follow the player, based on the most recent readings of leftRead and rightRead, and sets moveRight and/or moveLeft accordingly
 void checkMoveHead() {
@@ -73,14 +85,6 @@ void checkMoveHead() {
             moveRight = false;
             //!!!!!NOTE THAT THERE CAN BE A CASE WHERE THE PLAYER LEAVES RANGE!!!!!
         }
-    }
-}
-
-//if both sensors have a reading, the guardian can see the player (true)
-bool canSeePlayer(){
-    if ((leftRead > 0) and (rightRead > 0)){
-        return true;
-    } else {
-        return false;
+        canSee = canSeePlayer();
     }
 }

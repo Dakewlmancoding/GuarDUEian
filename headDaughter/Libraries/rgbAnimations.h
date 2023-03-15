@@ -3,6 +3,7 @@
 
 /************************************************** VARIABLES ***************************************************/
 
+const int headLights = 4;
 const int eyePin = 9; // Eye data in pin
 const int numLeds = 57;
 const int eyeBrightness = 10;
@@ -25,6 +26,7 @@ const uint32_t lightBlue = eyeRings.Color(0, 235, 255);
 
 // Runs in setup - general matrix startup stuff and it forces the eye to show as off
 void setupLights(){
+    pinMode(headLights,OUTPUT);
     eyeRings.begin();
     eyeRings.setBrightness(eyeBrightness);
     eyeRings.fill(eyeRings.Color(0, 0, 0));
@@ -91,10 +93,10 @@ void eyeShoot() {
 
 // Turns on body lights
 void lightsOn() {
-
+  digitalWrite(headLights,HIGH);
 }
 
 // Turns off body lights
 void lightsOff() {
-
+  digitalWrite(headLights,LOW);
 }
